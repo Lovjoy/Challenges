@@ -21,7 +21,7 @@ public class Main {
 		int mobAttackType;
 		int mobMelee;
 		int mobSpecial;
-		int turn = 0;
+		boolean turn = true;
 		int randText;
 
 		System.out.println("After a long day of killing boars in the forest, you stumble into their "
@@ -30,7 +30,7 @@ public class Main {
 		attackType = sc.nextInt();
 
 		while (monsterHealth > 0 && playerHealth > 0) {
-			if (turn % 2 == 0) {
+			if (turn == true) {
 				switch (attackType) {
 				case 1:
 					meleeAttack = rand.nextInt(50, 151);
@@ -120,7 +120,7 @@ public class Main {
 				attackType = sc.nextInt();
 
 			}
-			turn++;
+			turn = false;
 		}
 		if (playerHealth <= 0) {
 			System.out.println("Boars are going to be ruling the world now thanks to you.");
