@@ -1,4 +1,5 @@
 package Main;
+
 //Ray Joy
 //10/4/2024
 //Tic-Tac-Toe
@@ -30,8 +31,8 @@ public class Main {
 
 		while (winner == false) {
 			if (computerTurn == false) {
-				System.out.println("|" + top1 + "|" + top2 + "|" + top3 + "|\n|" + mid4 + "|" + mid5 + "|" + mid6 + "|\n|"
-						+ bot7 + "|" + bot8 + "|" + bot9 + "|\n");
+				System.out.println("\n|" + top1 + "|" + top2 + "|" + top3 + "|\n|" + mid4 + "|" + mid5 + "|" + mid6
+						+ "|\n|" + bot7 + "|" + bot8 + "|" + bot9 + "|\n");
 
 				System.out.print("Choose a number between 1-9 that isn't taken by an X or O: ");
 				playerMove = scnr.next().charAt(0);
@@ -97,7 +98,6 @@ public class Main {
 					break;
 				}
 
-
 			} else {
 
 				random = rand.nextInt(1, 10);
@@ -161,55 +161,73 @@ public class Main {
 					break;
 				}
 			}
-
 			if (top1 == top2 && top2 == top3) {
 				winner = true;
 				if (top1 == 'X') {
-					System.out.println("Congratulations! You win Tic-Tac-Toe.");
+					System.out.println("\nCongratulations! You win Tic-Tac-Toe.");
 				} else {
-					System.out.println("Sorry, you lose. Better luck next time.");
+					System.out.println("\nSorry, you lose. Better luck next time.");
 				}
 			} else if (top1 == mid4 && mid4 == bot7) {
 				winner = true;
 				if (top1 == 'X') {
-					System.out.println("Congratulations! You win Tic-Tac-Toe.");
+					System.out.println("\nCongratulations! You win Tic-Tac-Toe.");
 				} else {
-					System.out.println("Sorry, you lose. Better luck next time.");
+					System.out.println("\nSorry, you lose. Better luck next time.");
 				}
 			} else if (top1 == mid5 && mid5 == bot9) {
 				winner = true;
 				if (top1 == 'X') {
-					System.out.println("Congratulations! You win Tic-Tac-Toe.");
+					System.out.println("\nCongratulations! You win Tic-Tac-Toe.");
 				} else {
-					System.out.println("Sorry, you lose. Better luck next time.");
+					System.out.println("\nSorry, you lose. Better luck next time.");
 				}
 			} else if (mid4 == mid5 && mid5 == mid6) {
 				winner = true;
 				if (mid4 == 'X') {
-					System.out.println("Congratulations! You win Tic-Tac-Toe.");
+					System.out.println("\nCongratulations! You win Tic-Tac-Toe.");
 				} else {
-					System.out.println("Sorry, you lose. Better luck next time.");
+					System.out.println("\nSorry, you lose. Better luck next time.");
 				}
 			} else if (bot7 == bot8 && bot8 == bot9) {
 				winner = true;
 				if (bot7 == 'X') {
-					System.out.println("Congratulations! You win Tic-Tac-Toe.");
+					System.out.println("\nCongratulations! You win Tic-Tac-Toe.");
 				} else {
-					System.out.println("Sorry, you lose. Better luck next time.");
+					System.out.println("\nSorry, you lose. Better luck next time.");
 				}
 			} else if (top3 == mid5 && mid5 == bot7) {
 				winner = true;
-				if (top1 == 'X') {
-					System.out.println("Congratulations! You win Tic-Tac-Toe.");
+				if (top3 == 'X') {
+					System.out.println("\nCongratulations! You win Tic-Tac-Toe.");
 				} else {
-					System.out.println("Sorry, you lose. Better luck next time.");
+					System.out.println("\nSorry, you lose. Better luck next time.");
 				}
-			} else if (top1 != '1' && top2 != '2' && top3 != '3' && mid4 != '4' && mid5 != '5' && mid6 != '6' && bot7 != '7'
-					&& bot8 != '8' && bot9 != '9') {
+			} else if (top2 == mid5 && mid6 == bot8) {
+				winner = true;
+				if (top2 == 'X') {
+					System.out.println("\nCongratulations! You win Tic-Tac-Toe.");
+				} else {
+					System.out.println("\nSorry, you lose. Better luck next time.");
+				}
+			} else if (top3 == mid6 && mid6 == bot9) {
+				winner = true;
+				if (top3 == 'X') {
+					System.out.println("\nCongratulations! You win Tic-Tac-Toe.");
+				} else {
+					System.out.println("\nSorry, you lose. Better luck next time.");
+				}
+			}
+			else if (top1 != '1' && top2 != '2' && top3 != '3' && mid4 != '4' && mid5 != '5' && mid6 != '6'
+					&& bot7 != '7' && bot8 != '8' && bot9 != '9') {
 				System.out.println("CAT!!");
 				winner = true;
 			} else {
 			}
+		}
+		if (winner = true) {
+			System.out.println("\n|" + top1 + "|" + top2 + "|" + top3 + "|\n|" + mid4 + "|" + mid5 + "|" + mid6 + "|\n|"
+					+ bot7 + "|" + bot8 + "|" + bot9 + "|\n");
 		}
 	}
 }
