@@ -31,6 +31,7 @@ public class Main {
 
 			System.out.println("Enter your message you want to be coded as a secret: \n");
 			sc.nextLine();
+			// Must include sc.nextLine() because sc.next returns the .length() of the first word
 			message = sc.nextLine();
 			messageLegnth = message.length();
 
