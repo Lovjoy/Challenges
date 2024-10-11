@@ -22,8 +22,8 @@ on max bets, all rows are active in all directions.
 
 The following items are spun on the slots, and award these points
 
-banana - 1 $ per banana. no matches required.
-marshmallow - 5$ for 2 in a row. 10$ for 3 in a row.
+banana - 2 $ per banana. no matches required. 10$ for 3 in row
+marshmallow - 10$ for 2 in a row. 15$ for 3 in a row.
 Cat - 25$ for 3 in a row. 
 Otter - 50$ for 3 in a row.
 Tiger - 100$ for 3 in a row.
@@ -52,17 +52,35 @@ public enum Symbol {BANANA, MARSHMALLOW, CAT, OTTER, TIGER, SHEEP, HALF_MOON, FU
 		Scanner sc = new Scanner(System.in);
 		Random rand = new Random();
 		
-		int cash = 5000;
-		char bet;
+		int cash = 1000; 	// start $1000 win at $2000 lose win less than $5
+		int startCash;		// how much cash at the beginning of the slot turn, used for total turn payout
+		char bet;			// menu option
 		char top1, top2, top3, mid1, mid2, mid3, bot1, bot2, bot3;
-		double randomNum;
+		double randomNum;	// used for RNG to create Symbol board
 		
-		while (cash > 0) {
+		
+		// Stops when player is does not have enough cash to bet
+		while (cash > 4) {
+			if (cash > 2000) {
+				break;
+			}
+				
 		
 		System.out.println("Current cash is $" + cash);
-		System.out.println("\nEnter bet about:\na) -$5 Middle Row\nb) -$10 All Rows\nc) -$15 All Bets");
+		System.out.println("\nEnter bet about:\na) -$5 Middle Row\nb) -$10 All Rows\nc) -$15 All Bets\nd) Symbols Key");
 		bet = sc.next().charAt(0);
 		
+		// Prompts user to select different bet if player does not have enough cash
+		if ((bet == 'c' || bet == 'C' || bet == '3') && cash < 15) {
+			System.out.println("You do not have enough cash.");
+			continue;
+		}
+		if ((bet == 'b' || bet == 'B' || bet == '2') && cash < 10) {
+			System.out.println("You do not have enough cash.");
+			continue;
+		}
+		
+		// Symbol board
 		randomNum = rand.nextDouble();
 		if (randomNum <= 0.25) {
 			top1 = String.valueOf(Symbol.BANANA).charAt(0); 	//banana - 25%
@@ -225,33 +243,32 @@ public enum Symbol {BANANA, MARSHMALLOW, CAT, OTTER, TIGER, SHEEP, HALF_MOON, FU
 		} else {
 			bot3 = String.valueOf(Symbol.FULL_MOON).charAt(0);	//full moon - 5%
 		}
-		System.out.println("| " + top1 + " | " + top2 + " | " + top3 + " |\n"
-				+ "| " + mid1 + " | " + mid2 + " | " + mid3 + " |\n"
-						+ "| " + bot1 + " | " + bot2 + " | " + bot3 + " |\n");
-		
+		System.out.println("| " + top1 + " | " + top2 + " | " + top3 + " |\n" + "| " + mid1 + " | " + mid2 + " | "
+				+ mid3 + " |\n" + "| " + bot1 + " | " + bot2 + " | " + bot3 + " |\n");
+		startCash = cash;
+
 		switch (bet) {
 		// min bet mid row only
-		
-		
+
 //		Vertical Columns		
-		case 'c': 
+		case 'c':
 		case 'C':
 		case '3':
 //			Total Cost for ALL Bets $15
 			cash -= 5;
 //			FIRST COLUMN
-//			triple banana total payout $5
+//			triple banana total payout $10
 			if (top1 == 'B' && top1 == mid1 && mid1 == bot1) {
-				cash += 2;
-				System.out.println("Triple Banana! +$2");
+				cash += 4;
+				System.out.println("Triple Banana! +$4");
 			}
-//			marshmallow - 5$ for 2 in a row. 10$ for 3 in a row.
+//			marshmallow - 10$ for 2 in a row. 15$ for 3 in a row.
 			if (top1 == 'M' && mid1 == 'M' && bot1 == 'M') {
-				cash += 10;
-				System.out.println("Triple Marshmallow! +$10");
+				cash += 15;
+				System.out.println("Triple Marshmallow! +$15");
 			} else if (top1 == 'M' && mid1 == 'M' || mid1 == 'M' && bot1 == 'M') {
-				cash += 5;
-				System.out.println("Marshmallow Marshmallow Yum! +$5");
+				cash += 10;
+				System.out.println("Marshmallow Marshmallow Yum! +$10");
 			}
 //			Cat - 25$ for 3 in a row. 
 			if (top1 == 'C' && top1 == mid1 && mid1 == bot1) {
@@ -284,18 +301,18 @@ public enum Symbol {BANANA, MARSHMALLOW, CAT, OTTER, TIGER, SHEEP, HALF_MOON, FU
 				System.out.println("You are over the Full Moon with this Jackpot!! +$1000");
 			}
 //			MIDDLE COLUMN
-//			triple banana total payout $5
+//			triple banana total payout $10
 			if (top2 == 'B' && top2 == mid2 && mid2 == bot2) {
-				cash += 2;
-				System.out.println("Triple Banana! +$2");
+				cash += 4;
+				System.out.println("Triple Banana! +$4");
 			}
-//			marshmallow - 5$ for 2 in a row. 10$ for 3 in a row.
+//			marshmallow - 10$ for 2 in a row. 15$ for 3 in a row.
 			if (top2 == 'M' && mid2 == 'M' && bot2 == 'M') {
-				cash += 10;
-				System.out.println("Triple Marshmallow! +$10");
+				cash += 15;
+				System.out.println("Triple Marshmallow! +$15");
 			} else if (top2 == 'M' && mid2 == 'M' || mid2 == 'M' && bot2 == 'M') {
-				cash += 5;
-				System.out.println("Marshmallow Marshmallow Yum! +$5");
+				cash += 10;
+				System.out.println("Marshmallow Marshmallow Yum! +$10");
 			}
 //			Cat - 25$ for 3 in a row. 
 			if (top2 == 'C' && top2 == mid2 && mid2 == bot2) {
@@ -328,18 +345,18 @@ public enum Symbol {BANANA, MARSHMALLOW, CAT, OTTER, TIGER, SHEEP, HALF_MOON, FU
 				System.out.println("You are over the Full Moon with this Jackpot!! +$1000");
 			}
 //			LAST COLUMN
-//			triple banana total payout $5
+//			triple banana total payout $10
 			if (top3 == 'B' && top3 == mid3 && mid3 == bot3) {
-				cash += 2;
-				System.out.println("Triple Banana! +$2");
+				cash += 4;
+				System.out.println("Triple Banana! +$4");
 			}
-//			marshmallow - 5$ for 2 in a row. 10$ for 3 in a row.
+//			marshmallow - 10$ for 2 in a row. 15$ for 3 in a row.
 			if (top3 == 'M' && mid3 == 'M' && bot3 == 'M') {
-				cash += 10;
-				System.out.println("Triple Marshmallow! +$10");
+				cash += 15;
+				System.out.println("Triple Marshmallow! +$15");
 			} else if (top3 == 'M' && mid3 == 'M' || mid3 == 'M' && bot3 == 'M') {
-				cash += 5;
-				System.out.println("Marshmallow Marshmallow Yum! +$5");
+				cash += 10;
+				System.out.println("Marshmallow Marshmallow Yum! +$10");
 			}
 //			Cat - 25$ for 3 in a row. 
 			if (top3 == 'C' && top3 == mid3 && mid3 == bot3) {
@@ -371,40 +388,39 @@ public enum Symbol {BANANA, MARSHMALLOW, CAT, OTTER, TIGER, SHEEP, HALF_MOON, FU
 				cash += 1000;
 				System.out.println("You are over the Full Moon with this Jackpot!! +$1000");
 			}
-			
-			
+
 //		Top and Bottom Rows
-		case 'b': 
+		case 'b':
 		case 'B':
 		case '2':
 //			Bet for 3 Rows is $10
 			cash -= 5;
 //			TOP ROW
-//			banana - 1 $ per banana. no matches required.
+//			banana - 2 $ per banana. no matches required.
 			if (top1 == 'B') {
-				cash++;
-				System.out.println("Banana +$1");
-			} 
-			if (top2 == 'B') {
-				cash++;
-				System.out.println("Banana +$1");
-			} 
-			if (top3 == 'B') {
-				cash++;
-				System.out.println("Banana +$1");
-			}
-//			triple banana total payout $5
-			if (top1 == 'B' && top1 == top2 && top2 == top3) {
 				cash += 2;
-				System.out.println("Triple Banana! +$2");
+				System.out.println("Banana +$2");
 			}
-//			marshmallow - 5$ for 2 in a row. 10$ for 3 in a row.
+			if (top2 == 'B') {
+				cash += 2;
+				System.out.println("Banana +$2");
+			}
+			if (top3 == 'B') {
+				cash += 2;
+				System.out.println("Banana +$2");
+			}
+//			triple banana total payout $10
+			if (top1 == 'B' && top1 == top2 && top2 == top3) {
+				cash += 4;
+				System.out.println("Triple Banana! +$4");
+			}
+//			marshmallow - 10$ for 2 in a row. 15$ for 3 in a row.
 			if (top1 == 'M' && top2 == 'M' && top3 == 'M') {
-				cash += 10;
-				System.out.println("Triple Marshmallow! +$10");
+				cash += 15;
+				System.out.println("Triple Marshmallow! +$15");
 			} else if (top1 == 'M' && top2 == 'M' || top2 == 'M' && top3 == 'M') {
-				cash += 5;
-				System.out.println("Marshmallow Marshmallow Yum! +$5");
+				cash += 10;
+				System.out.println("Marshmallow Marshmallow Yum! +$10");
 			}
 //			Cat - 25$ for 3 in a row. 
 			if (top1 == 'C' && top1 == top2 && top2 == top3) {
@@ -437,31 +453,31 @@ public enum Symbol {BANANA, MARSHMALLOW, CAT, OTTER, TIGER, SHEEP, HALF_MOON, FU
 				System.out.println("You are over the Full Moon with this Jackpot!! +$1000");
 			}
 //			BOTTOM ROW
-//			banana - 1 $ per banana. no matches required.
+//			banana - 2 $ per banana. no matches required.
 			if (bot1 == 'B') {
-				cash++;
-				System.out.println("Banana +$1");
-			} 
+				cash +=2;
+				System.out.println("Banana +$2");
+			}
 			if (bot2 == 'B') {
-				cash++;
-				System.out.println("Banana +$1");
-			} 
+				cash +=2;
+				System.out.println("Banana +$2");
+			}
 			if (bot3 == 'B') {
-				cash++;
-				System.out.println("Banana +$1");
+				cash +=2;
+				System.out.println("Banana +$2");
 			}
 //			triple banana total payout $5
 			if (bot1 == 'B' && bot1 == bot2 && bot2 == bot3) {
-				cash += 2;
-				System.out.println("Triple Banana! +$2");
+				cash += 4;
+				System.out.println("Triple Banana! +$4");
 			}
-//			marshmallow - 5$ for 2 in a row. 10$ for 3 in a row.
+//			marshmallow - 10$ for 2 in a row. 15$ for 3 in a row.
 			if (bot1 == 'M' && bot2 == 'M' && bot3 == 'M') {
-				cash += 10;
-				System.out.println("Triple Marshmallow! +$10");
+				cash += 15;
+				System.out.println("Triple Marshmallow! +$15");
 			} else if (bot1 == 'M' && bot2 == 'M' || bot2 == 'M' && bot3 == 'M') {
-				cash += 5;
-				System.out.println("Marshmallow Marshmallow Yum! +$5");
+				cash += 10;
+				System.out.println("Marshmallow Marshmallow Yum! +$10");
 			}
 //			Cat - 25$ for 3 in a row. 
 			if (bot1 == 'C' && bot1 == bot2 && bot2 == bot3) {
@@ -494,40 +510,38 @@ public enum Symbol {BANANA, MARSHMALLOW, CAT, OTTER, TIGER, SHEEP, HALF_MOON, FU
 				System.out.println("You are over the Full Moon with this Jackpot!! +$1000");
 			}
 
-			
-			
 // 		Middle Row Only
 		case 'a':
 		case 'A':
 		case '1':
 //			bet for mid row only $5
 			cash -= 5;
-		
-//			banana - 1 $ per banana. no matches required.
+
+//			banana - 2 $ per banana. no matches required.
 			if (mid1 == 'B') {
-				cash++;
-				System.out.println("Banana +$1");
-			} 
+				cash +=2;
+				System.out.println("Banana +$2");
+			}
 			if (mid2 == 'B') {
-				cash++;
-				System.out.println("Banana +$1");
-			} 
+				cash +=2;
+				System.out.println("Banana +$2");
+			}
 			if (mid3 == 'B') {
-				cash++;
-				System.out.println("Banana +$1");
-			}
-//			triple banana total payout $5
-			if (mid1 == 'B' && mid1 == mid2 && mid2 == mid3) {
 				cash += 2;
-				System.out.println("Triple Banana! +$2");
+				System.out.println("Banana +$2");
 			}
-//			marshmallow - 5$ for 2 in a row. 10$ for 3 in a row.
+//			triple banana total payout $10
+			if (mid1 == 'B' && mid1 == mid2 && mid2 == mid3) {
+				cash += 4;
+				System.out.println("Triple Banana! +$4");
+			}
+//			marshmallow - 10$ for 2 in a row. 15$ for 3 in a row.
 			if (mid1 == 'M' && mid2 == 'M' && mid3 == 'M') {
-				cash += 10;
-				System.out.println("Triple Marshmallow! +$10");
+				cash += 15;
+				System.out.println("Triple Marshmallow! +$15");
 			} else if (mid1 == 'M' && mid2 == 'M' || mid2 == 'M' && mid3 == 'M') {
-				cash += 5;
-				System.out.println("Marshmallow Marshmallow Yum! +$5");
+				cash += 10;
+				System.out.println("Marshmallow Marshmallow Yum! +$10");
 			}
 //			Cat - 25$ for 3 in a row. 
 			if (mid1 == 'C' && mid1 == mid2 && mid2 == mid3) {
@@ -559,12 +573,32 @@ public enum Symbol {BANANA, MARSHMALLOW, CAT, OTTER, TIGER, SHEEP, HALF_MOON, FU
 				cash += 1000;
 				System.out.println("You are over the Full Moon with this Jackpot!! +$1000");
 			}
+
+			if (startCash > cash) {
+				System.out.println("You lost $" + (startCash - cash) + " total, better luck next time.");
+			} else {
+				System.out.println("You WIN $" + (cash - startCash) + " total, congratulations!!");
+			}
+			break;
+
+		case 'd':
+		case 'D':
+		case '4':
+			System.out.println("BANANA $2 per, $4 bonus for 3 in row\nMARSHMALLOW $10 for two in row, $15 for 3 in row"
+					+ "\nCAT $25 for 3 in row\nOTTER $50 for 3 in row\nTIGER $100 for 3 in row\nSHEEP $300 for 3 in row"
+					+ "\nHALF MOON $500 for 3 in row\nFULL MOON $1000 for 3 in row");
 			break;
 		default:
-			System.out.println("Please enter either a, b, or c to bet.");
+			System.out.println("Please enter either a, b, c, or d.");
+			break;
 		}
-		
-		}	
+
 	}
+		if (cash < 5) {
+			System.out.println("You are out of cash, good bye.");
+		} else {
+			System.out.println("Congratulations!! You total payout is $" + cash + ". Thank you for playing.");
+		}
+}
 
 }
