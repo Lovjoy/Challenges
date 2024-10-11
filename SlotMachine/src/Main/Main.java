@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 Write your very own casino game. The user starts with a set amount of money (5000$), and is 
 allowed to spin the slots until they run out of money. Additionally the user can change the bet 
-amount from min (15$), med(30$), max(45$). the display is a 3X3 grid which looks like this.
+amount from min (5$), med(10$), max(15$). the display is a 3X3 grid which looks like this.
 
 X|X|X
 X|X|X
@@ -24,7 +24,7 @@ The following items are spun on the slots, and award these points
 
 banana - 1 $ per banana. no matches required.
 marshmallow - 5$ for 2 in a row. 10$ for 3 in a row.
-Bear - 25$ for 3 in a row. 
+Cat - 25$ for 3 in a row. 
 Otter - 50$ for 3 in a row.
 Tiger - 100$ for 3 in a row.
 Sheep - 300$ for 3 in a row.
@@ -60,7 +60,7 @@ public enum Symbol {BANANA, MARSHMALLOW, CAT, OTTER, TIGER, SHEEP, HALF_MOON, FU
 		while (cash > 0) {
 		
 		System.out.println("Current cash is $" + cash);
-		System.out.println("\nEnter bet about:\na) -$15 Middle Row\nb) -$30 All Rows\nc) -$45 All Bets");
+		System.out.println("\nEnter bet about:\na) -$5 Middle Row\nb) -$10 All Rows\nc) -$15 All Bets");
 		bet = sc.next().charAt(0);
 		
 		randomNum = rand.nextDouble();
@@ -237,6 +237,8 @@ public enum Symbol {BANANA, MARSHMALLOW, CAT, OTTER, TIGER, SHEEP, HALF_MOON, FU
 		case 'c': 
 		case 'C':
 		case '3':
+//			Total Cost for ALL Bets $15
+			cash -= 5;
 //			FIRST COLUMN
 //			triple banana total payout $5
 			if (top1 == 'B' && top1 == mid1 && mid1 == bot1) {
@@ -375,6 +377,8 @@ public enum Symbol {BANANA, MARSHMALLOW, CAT, OTTER, TIGER, SHEEP, HALF_MOON, FU
 		case 'b': 
 		case 'B':
 		case '2':
+//			Bet for 3 Rows is $10
+			cash -= 5;
 //			TOP ROW
 //			banana - 1 $ per banana. no matches required.
 			if (top1 == 'B') {
@@ -496,7 +500,8 @@ public enum Symbol {BANANA, MARSHMALLOW, CAT, OTTER, TIGER, SHEEP, HALF_MOON, FU
 		case 'a':
 		case 'A':
 		case '1':
-			cash -= 15;
+//			bet for mid row only $5
+			cash -= 5;
 		
 //			banana - 1 $ per banana. no matches required.
 			if (mid1 == 'B') {
