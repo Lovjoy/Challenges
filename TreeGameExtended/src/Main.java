@@ -9,7 +9,6 @@ public class Main {
     public static void main(String[] args) {
 //      Ray Joy
 //      10/12/2024
-
         /* Challenge - Tree Game
         There are 6 different types of trees players may chop. all trees yield a maximum amount of logs. with each log
         taken, there is an 8% chance that the tree will fall and no more logs can be harvested. Additionally, the
@@ -22,13 +21,13 @@ public class Main {
         Players may upgrade their axe, and will start with a rusty axe which provides no bonus. The player can purchase
         the following axes from the shops
         bronze axe - 200 coins || + 1% chop chance
-        iron axe - 300 coins || +2% chop chance
-        steel axe - 750 coins || +3% chop chance
-        obsidian axe - 1500 coins || +4% chop chance || 1% reduce chance tree will fall
-        mithril axe - 3000 coins || +5% chop chance || 2% reduce chance tree will fall
-        adamant axe - 7500 coins || 6% chop chance || 3% reduce chance tree will fall
-        runed axe - 12000 coins || 7% chop chance || 4% reduce chance tree will fall
-        enchanted axe - 20000 coins || 10% chop chance || 5% reduce chance tree will fall
+        iron axe - 500 coins || +2% chop chance
+        steel axe - 1250 coins || +3% chop chance
+        obsidian axe - 2500 coins || +4% chop chance || 1% reduce chance tree will fall
+        mithril axe - 2000 coins || +5% chop chance || 2% reduce chance tree will fall
+        adamant axe - 10000 coins || 6% chop chance || 3% reduce chance tree will fall
+        runed axe - 30000 coins || 7% chop chance || 4% reduce chance tree will fall
+        enchanted axe - 50000 coins || 10% chop chance || 5% reduce chance tree will fall
         Trees are in a forest of 4 tree options. At level there is a 50% chance that tree will appear. For every level
         the player gains, there is an additional 3% chance that tree will appear in the forest.
         normal tree || level 1 || 10 XP per log ||  5 log max || 20% cut chance ||  7 gp per log
@@ -39,7 +38,6 @@ public class Main {
         magic tree  || level 80|| 100xp per log || 32 log max || 3% cut chance  || 49 gp per log*/
         Scanner sc = new Scanner(System.in);
         Random rand = new Random();
-
         int coins = 0;                  // Total gold
         int playerLevel = 1;            // Current player level, game over at level 100
         int playerTotalXp = 0;          // XP earned for logs chopped at current level
@@ -67,11 +65,9 @@ public class Main {
         int xpPerLog = 10;              // XP per log when chopped, depends on tree type
         Axe axe = Axe.RUSTY;            // Type of axe, default is rusty axe with no stat bonuses
         Axe oldAxeHold = axe;           // Temporary hold of axe
-
         // Welcome Message
         System.out.println("Welcome to the Tree Game! \nYou are to explore the forest and collect logs. Logs can be " +
                 "sold and coins can be used to upgrade your axe.");
-
         // Winning condition level 100
         while (playerLevel < 100) {
             switch (treeMenu) {
@@ -145,8 +141,6 @@ public class Main {
                         } else {
                             treeOne = Tree.NORMAL;
                         }
-
-
                         if (rand.nextDouble() < (0.40 + (playerLevel - 45) * 0.02)) {
                             treeTwo = Tree.MAPLE;
                         } else if (rand.nextDouble() < (0.50 - (playerLevel - 45) * 0.02)) {
@@ -157,7 +151,6 @@ public class Main {
                             treeTwo = Tree.NORMAL;
 
                         }
-
                         if (rand.nextDouble() < (0.40 + (playerLevel - 45) * 0.02)) {
                             treeThree = Tree.MAPLE;
                         } else if (rand.nextDouble() < (0.50 - (playerLevel - 45) * 0.02)) {
@@ -178,7 +171,6 @@ public class Main {
                         } else {
                             treeFour = Tree.NORMAL;
                         }
-
                     }
                     if (playerLevel >= 60 && playerLevel < 80) {
                         if (rand.nextDouble() < (0.35 + (playerLevel - 60) * 0.02)) {
@@ -313,7 +305,7 @@ public class Main {
                         treeCutChance = 0.20;
                         goldPerLog = 7;
                     }
-                    // oak tree    || level 15|| 15 XP per log || 12 log max || 18% cut chance ||  9 gp per log
+                    // oak tree    || level 8|| 15 XP per log || 12 log max || 18% cut chance ||  9 gp per log
                     if (tree == Tree.OAK) {
                         xpPerLog = 15;
                         maxLogs = 12;
@@ -322,28 +314,28 @@ public class Main {
                     }
 //                    willow tree || level 30|| 30 xp per log || 15 log max || 15% cut chance || 11 gp per log
                     if (tree == Tree.WILLOW) {
-                        xpPerLog = 40;
+                        xpPerLog = 30;
                         maxLogs = 15;
                         treeCutChance = 0.15;
                         goldPerLog = 11;
                     }
 //                    maple tree  || level 45|| 45 xp per log || 19 log max || 12% cut chance || 14 gp per log
                     if (tree == Tree.MAPLE) {
-                        xpPerLog = 60;
+                        xpPerLog = 45;
                         maxLogs = 19;
                         treeCutChance = 0.12;
                         goldPerLog = 14;
                     }
 //                    yew tree    || level 60|| 60 xp per log || 21 log max || 8% cut chance  || 19 gp per log
                     if (tree == Tree.YEW) {
-                        xpPerLog = 80;
+                        xpPerLog = 60;
                         maxLogs = 21;
                         treeCutChance = 0.08;
                         goldPerLog = 19;
                     }
 //                    magic tree  || level 80|| 100xp per log || 32 log max || 3% cut chance  || 49 gp per log
                     if (tree == Tree.MAGIC) {
-                        xpPerLog = 125;
+                        xpPerLog = 100;
                         maxLogs = 32;
                         treeCutChance = 0.03;
                         goldPerLog = 49;
@@ -357,7 +349,7 @@ public class Main {
                             break;
                         }
                         try {
-                            Thread.sleep(500);
+                            Thread.sleep(450);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -372,13 +364,13 @@ public class Main {
                                 logsRemaining = 0;
                                 System.out.println("Crack.");
                                 try {
-                                    Thread.sleep(900);
+                                    Thread.sleep(780);
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
                                 }
                                 System.out.println("Timber!!!");
                                 try {
-                                    Thread.sleep(1400);
+                                    Thread.sleep(1100);
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
                                 }
@@ -388,140 +380,175 @@ public class Main {
                             }
                         }
                     }
-
-
-            goldValueOfLogs += goldPerLog * newLogs;
-            logsInBag += newLogs;
-            System.out.println("You have chopped " + newLogs + " logs and have a " + logsInBag + "/32 logs" +
-                    " in bag. You gained " + xpPerLog * newLogs + " XP.");
-
-
-            break;
-            case 2:                 // Sell Logs
-            	coins += goldValueOfLogs;
-                System.out.println("You sold " + logsInBag + " logs for " + goldValueOfLogs + "g and have "
-                		+ "total coins of " + coins + "g.");
-                logsInBag = 0;
-                goldValueOfLogs = 0;
-                break;
-            case 3:                 // Buy Axe
-                System.out.println("Total Coins: " + coins + "g. Select an Axe to buy or select Exit.");
-                System.out.println("1) " + String.valueOf(Axe.BRONZE) + " 200g\n2) " + String.valueOf(Axe.IRON)
-                        + " 500g\n3) " + String.valueOf(Axe.STEEL) + " 1,250g\n4) " + String.valueOf(Axe.OBSIDIAN)
-                        + " 2,500g\n5) " + String.valueOf(Axe.MITHRIL) + " 5,000g\n6) " + String.valueOf(Axe.ADAMANT)
-                        + " 10,00g\n7) " + String.valueOf(Axe.RUNED) + " 20,000g\n8) " + String.valueOf(Axe.ENCHANTED)
-                        + " 30,000g\n9) Exit");
-                axeMenu = sc.nextInt();
-                oldAxeHold = axe;
-                switch (axeMenu) {
-
-                    case 1:
-                        axe = Axe.BRONZE;
-                        break;
-                    case 2:
-                        axe = Axe.IRON;
-                        break;
-                    case 3:
-                        axe = Axe.STEEL;
-                        break;
-                    case 4:
-                        axe = Axe.OBSIDIAN;
-                        break;
-                    case 5:
-                        axe = Axe.MITHRIL;
-                        break;
-                    case 6:
-                        axe = Axe.ADAMANT;
-                        break;
-                    case 7:
-                        axe = Axe.RUNED;
-                        break;
-                    case 8:
-                        axe = Axe.ENCHANTED;
-                        break;
-                    case 9:
-                    default:
-                    axeMenu = 9;
-                        break;
-                }
-                if (axeMenu == 9) {
-                	break;
-                }
-                if (axe == Axe.BRONZE) {
-                    axeBonus = 0.01;
-                    axeCost = 200;
-                }
-                if (axe == Axe.IRON) {
-                    axeBonus = 0.02;
-                    axeCost = 500;
-                }
-                if (axe == Axe.STEEL) {
-                    axeBonus = 0.04;
-                    axeCost = 1250;
-                }
-                if (axe == Axe.OBSIDIAN) {
-                    axeBonus = 0.05;
-                    axeCost = 2500;
-                    decreaseFallChance = 0.01;
-                }
-                if (axe == Axe.MITHRIL) {
-                    axeBonus = 0.06;
-                    axeCost = 5000;
-                    decreaseFallChance = 0.02;
-                }
-                if (axe == Axe.ADAMANT) {
-                    axeBonus = 0.07;
-                    axeCost = 10000;
-                    decreaseFallChance = 0.03;
-                }
-                if (axe == Axe.RUNED) {
-                    axeBonus = 0.10;
-                    axeCost = 20000;
-                    decreaseFallChance = 0.04;
-                }
-                if (axe == Axe.ENCHANTED) {
-                    axeBonus = 0.14;
-                    axeCost = 30000;
-                    decreaseFallChance = 0.05;
-                }
-                if (coins >= axeCost) {
-                    coins -= axeCost;
-                } else {
-                    axe = oldAxeHold;
-                    System.out.println("You do not have enough gold to purchase.");
+                    goldValueOfLogs += goldPerLog * newLogs;
+                    logsInBag += newLogs;
+                    System.out.println("You have chopped " + newLogs + " logs and have a " + logsInBag + "/32 logs" +
+                            " in bag. You gained " + xpPerLog * newLogs + " XP.");
+                    break;
+                case 2: // Sell Logs
+                    coins += goldValueOfLogs;
+                    System.out.println("You sold " + logsInBag + " logs for " + goldValueOfLogs + "g and have "
+                            + "total coins of " + coins + "g.");
+                    logsInBag = 0;
+                    goldValueOfLogs = 0;
+                    break;
+                case 3: // Buy Axe
+                    System.out.printf("Total Coins: %,dg.", coins);
+                    System.out.println("\nCurrent Axe: " + String.valueOf(axe));
+                    System.out.println("Select an Axe to buy or select Exit.");
+                    System.out.println("1) " + String.valueOf(Axe.BRONZE) + " 200g\n2) " + String.valueOf(Axe.IRON)
+                            + " 500g\n3) " + String.valueOf(Axe.STEEL) + " 1,250g\n4) " + String.valueOf(Axe.OBSIDIAN)
+                            + " 2,500g\n5) " + String.valueOf(Axe.MITHRIL) + " 5,000g\n6) " + String.valueOf(Axe.ADAMANT)
+                            + " 10,000g\n7) " + String.valueOf(Axe.RUNED) + " 30,000g\n8) " + String.valueOf(Axe.ENCHANTED)
+                            + " 50,000g\n9) Exit");
+                    axeMenu = sc.nextInt();
+                    oldAxeHold = axe;
+                    switch (axeMenu) {
+                        case 1:
+                            if (axe != Axe.IRON && axe != Axe.STEEL && axe != Axe.OBSIDIAN && axe != Axe.MITHRIL
+                                    && axe != Axe.ADAMANT && axe != Axe.RUNED && axe != Axe.ENCHANTED && axe != Axe.BRONZE) {
+                                axe = Axe.BRONZE;
+                            } else {
+                                System.out.println("Invalid purchase.");
+                            }
+                            break;
+                        case 2:
+                            if (axe != Axe.IRON && axe != Axe.STEEL && axe != Axe.OBSIDIAN && axe != Axe.MITHRIL
+                                    && axe != Axe.ADAMANT && axe != Axe.RUNED && axe != Axe.ENCHANTED) {
+                                axe = Axe.IRON;
+                            } else {
+                                System.out.println("Invalid purchase.");
+                            }
+                            break;
+                        case 3:
+                            if (axe != Axe.STEEL && axe != Axe.OBSIDIAN && axe != Axe.MITHRIL
+                                    && axe != Axe.ADAMANT && axe != Axe.RUNED && axe != Axe.ENCHANTED) {
+                                axe = Axe.STEEL;
+                            } else {
+                                System.out.println("Invalid purchase.");
+                            }
+                            break;
+                        case 4:
+                            if (axe != Axe.OBSIDIAN && axe != Axe.MITHRIL
+                                    && axe != Axe.ADAMANT && axe != Axe.RUNED && axe != Axe.ENCHANTED) {
+                                axe = Axe.OBSIDIAN;
+                            } else {
+                                System.out.println("Invalid purchase.");
+                            }
+                            break;
+                        case 5:
+                            if (axe != Axe.MITHRIL && axe != Axe.ADAMANT && axe != Axe.RUNED
+                                    && axe != Axe.ENCHANTED) {
+                                axe = Axe.MITHRIL;
+                            } else {
+                                System.out.println("Invalid purchase.");
+                            }
+                            break;
+                        case 6:
+                            if (axe != Axe.ADAMANT && axe != Axe.RUNED && axe != Axe.ENCHANTED) {
+                                axe = Axe.ADAMANT;
+                            } else {
+                                System.out.println("Invalid purchase.");
+                            }
+                            break;
+                        case 7:
+                            if (axe != Axe.RUNED && axe != Axe.ENCHANTED) {
+                                axe = Axe.RUNED;
+                            } else {
+                                System.out.println("Invalid purchase.");
+                            }
+                            break;
+                        case 8:
+                            if (axe != Axe.ENCHANTED) {
+                                axe = Axe.ENCHANTED;
+                            } else {
+                                System.out.println("Invalid purchase.");
+                            }
+                            break;
+                        case 9:
+                        default:
+                            axeMenu = 9;
+                            break;
                     }
-                break;
-            case 4: // See Stats
-                System.out.println("\nPLAYER STATS: " + "\nPlayer Level: " + playerLevel + "\nTotal Coins: " + coins + "g"
-                        + "\nAxe: " + String.valueOf(axe));
-                System.out.printf("Axe Bonus: %.0f%%\nChance tree fall: %.0f%%", axeBonus * 100,
-                        100 * (treeFallChance - decreaseFallChance));
-                System.out.println("\nBag: " + logsInBag + "/32 logs" + "\nXP to level: " + playerTotalXp
-                        + "/" + totalXpToLevel + " XP");
-                break;
-            case 5: // Quit Game
-                break;
-            default: // Error Message
-                System.out.println("Invalid menu option, please try again.");
-                break;
-        }
+                    if (axeMenu == 9) {
+                        break;
+                    }
+                    if (axe == Axe.BRONZE) {
+                        axeBonus = 0.01;
+                        axeCost = 200;
+                    }
+                    if (axe == Axe.IRON) {
+                        axeBonus = 0.02;
+                        axeCost = 500;
+                    }
+                    if (axe == Axe.STEEL) {
+                        axeBonus = 0.04;
+                        axeCost = 1250;
+                    }
+                    if (axe == Axe.OBSIDIAN) {
+                        axeBonus = 0.05;
+                        axeCost = 2500;
+                        decreaseFallChance = 0.01;
+                    }
+                    if (axe == Axe.MITHRIL) {
+                        axeBonus = 0.06;
+                        axeCost = 5000;
+                        decreaseFallChance = 0.02;
+                    }
+                    if (axe == Axe.ADAMANT) {
+                        axeBonus = 0.07;
+                        axeCost = 10000;
+                        decreaseFallChance = 0.03;
+                    }
+                    if (axe == Axe.RUNED) {
+                        axeBonus = 0.10;
+                        axeCost = 30000;
+                        decreaseFallChance = 0.04;
+                    }
+                    if (axe == Axe.ENCHANTED) {
+                        axeBonus = 0.14;
+                        axeCost = 50000;
+                        decreaseFallChance = 0.05;
+                    }
+                    if (coins >= axeCost) {
+                        coins -= axeCost;
+                    } else {
+                        axe = oldAxeHold;
+                        System.out.println("You do not have enough gold to purchase.");
+                    }
 
-        // Quit the Game and exit the while loop
-        if (treeMenu == 5) {
-            break;
-        }
-        // Main menu options
-        System.out.println("\nMENU: \n1) Explore Forest\n2) Sell Logs\n3) Buy Axe\n4) See Stats\n5) Exit");
-        treeMenu = sc.nextInt();
-        if (playerTotalXp >= totalXpToLevel) {
-            playerLevel++;
-            System.out.println("You have reached Level " + playerLevel + "!");
-            playerTotalXp -= totalXpToLevel;
-            totalXpToLevel *= Math.pow(1.054, (playerLevel - 1));
-        }
+                    System.out.println("Player Axe: " + axe + "\nAxe Bonus: " + axeBonus);
+                    break;
 
+                case 4: // See Stats
+                    System.out.println("\nPLAYER STATS: " + "\nPlayer Level: " + playerLevel);
+                            System.out.printf("Total Coins: %,dg", coins);
+                    System.out.println("\nAxe: " + String.valueOf(axe));
+                    System.out.printf("Axe Bonus: %.0f%%\nChance tree fall: %.0f%%", axeBonus * 100,
+                            100 * (treeFallChance - decreaseFallChance));
+                    System.out.println("\nBag: " + logsInBag + "/32 logs" + "\nXP to level: " + playerTotalXp
+                            + "/" + totalXpToLevel + " XP");
+                    break;
+                case 5: // Quit Game
+                    break;
+                default: // Error Message
+                    System.out.println("Invalid menu option, please try again.");
+                    break;
+            }
+            // Quit the Game and exit the while loop
+            if (treeMenu == 5) {
+                break;
+            }
+            // Main menu options
+            System.out.println("\nMENU: \n1) Explore Forest\n2) Sell Logs\n3) Buy Axe\n4) See Stats\n5) Exit");
+            treeMenu = sc.nextInt();
+            if (playerTotalXp >= totalXpToLevel) {
+                playerLevel++;
+                System.out.println("You have reached Level " + playerLevel + "!");
+                playerTotalXp -= totalXpToLevel;
+                totalXpToLevel = (int) (100 * Math.pow(1.075, (playerLevel - 1)));
+            }
+        }
+        System.out.println("Congratulations you reached level " + playerLevel + "! Thank you for playing. Goodbye.");
     }
-
-        System.out.println("Congratulations you reached level "+playerLevel +"! Thank you for playing. Goodbye.");
-}
 }
