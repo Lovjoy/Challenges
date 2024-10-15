@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/BaseConverter.iml" filepath="$PROJECT_DIR$/BaseConverter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BinaryNumbers.iml" filepath="$PROJECT_DIR$/BinaryNumbers.iml" />
     </modules>
   </component>
 </project>
