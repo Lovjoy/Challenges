@@ -65,9 +65,11 @@ public class Main {
         int xpPerLog = 10;              // XP per log when chopped, depends on tree type
         Axe axe = Axe.RUSTY;            // Type of axe, default is rusty axe with no stat bonuses
         Axe oldAxeHold = axe;           // Temporary hold of axe
+
         // Welcome Message
         System.out.println("Welcome to the Tree Game! \nYou are to explore the forest and collect logs. Logs can be " +
                 "sold and coins can be used to upgrade your axe.");
+
         // Winning condition level 100
         while (playerLevel < 100) {
             switch (treeMenu) {
@@ -380,6 +382,7 @@ public class Main {
                             }
                         }
                     }
+                    // Temporary hold value of logs until they are sold and added to coins
                     goldValueOfLogs += goldPerLog * newLogs;
                     logsInBag += newLogs;
                     System.out.println("You have chopped " + newLogs + " logs and have a " + logsInBag + "/32 logs" +
@@ -387,8 +390,9 @@ public class Main {
                     break;
                 case 2: // Sell Logs
                     coins += goldValueOfLogs;
-                    System.out.println("You sold " + logsInBag + " logs for " + goldValueOfLogs + "g and have "
-                            + "total coins of " + coins + "g.");
+                    System.out.print("You sold " + logsInBag + " logs for " + goldValueOfLogs + "g and have "
+                            + "total coins of ");
+                            System.out.printf("%,dg", coins);
                     logsInBag = 0;
                     goldValueOfLogs = 0;
                     break;
@@ -516,10 +520,10 @@ public class Main {
                         axe = oldAxeHold;
                         System.out.println("You do not have enough gold to purchase.");
                     }
-
-                    System.out.println("Player Axe: " + axe + "\nAxe Bonus: " + axeBonus);
+                    System.out.println("Player Axe: " + axe);
+                    System.out.printf("Axe Bonus: %.0f%%", 100 * axeBonus);
+                    System.out.printf("\nChance tree fall: %.0f%%", 100 * (treeFallChance - decreaseFallChance));
                     break;
-
                 case 4: // See Stats
                     System.out.println("\nPLAYER STATS: " + "\nPlayer Level: " + playerLevel);
                             System.out.printf("Total Coins: %,dg", coins);
