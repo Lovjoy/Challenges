@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -36,6 +37,7 @@ public class Main {
         maple tree  || level 45|| 45 xp per log || 19 log max || 12% cut chance || 14 gp per log
         yew tree    || level 60|| 60 xp per log || 21 log max || 8% cut chance  || 19 gp per log
         magic tree  || level 80|| 100xp per log || 32 log max || 3% cut chance  || 49 gp per log*/
+
         Scanner sc = new Scanner(System.in);
         Random rand = new Random();
         int coins = 0;                  // Total gold
@@ -66,6 +68,7 @@ public class Main {
         Axe axe = Axe.RUSTY;            // Type of axe, default is rusty axe with no stat bonuses
         Axe oldAxeHold = axe;           // Temporary hold of axe
 
+       
         // Welcome Message
         System.out.println("Welcome to the Tree Game! \nYou are to explore the forest and collect logs. Logs can be " +
                 "sold and coins can be used to upgrade your axe.");
@@ -414,6 +417,7 @@ public class Main {
                                 axe = Axe.BRONZE;
                             } else {
                                 System.out.println("Invalid purchase.");
+                                axeMenu = 9;
                             }
                             break;
                         case 2:
@@ -422,6 +426,7 @@ public class Main {
                                 axe = Axe.IRON;
                             } else {
                                 System.out.println("Invalid purchase.");
+                                axeMenu = 9;
                             }
                             break;
                         case 3:
@@ -430,6 +435,7 @@ public class Main {
                                 axe = Axe.STEEL;
                             } else {
                                 System.out.println("Invalid purchase.");
+                                axeMenu = 9;
                             }
                             break;
                         case 4:
@@ -438,6 +444,7 @@ public class Main {
                                 axe = Axe.OBSIDIAN;
                             } else {
                                 System.out.println("Invalid purchase.");
+                                axeMenu = 9;
                             }
                             break;
                         case 5:
@@ -446,6 +453,7 @@ public class Main {
                                 axe = Axe.MITHRIL;
                             } else {
                                 System.out.println("Invalid purchase.");
+                                axeMenu = 9;
                             }
                             break;
                         case 6:
@@ -453,6 +461,7 @@ public class Main {
                                 axe = Axe.ADAMANT;
                             } else {
                                 System.out.println("Invalid purchase.");
+                                axeMenu = 9;
                             }
                             break;
                         case 7:
@@ -460,6 +469,7 @@ public class Main {
                                 axe = Axe.RUNED;
                             } else {
                                 System.out.println("Invalid purchase.");
+                                axeMenu = 9;
                             }
                             break;
                         case 8:
@@ -467,6 +477,7 @@ public class Main {
                                 axe = Axe.ENCHANTED;
                             } else {
                                 System.out.println("Invalid purchase.");
+                                axeMenu = 9;
                             }
                             break;
                         case 9:
@@ -545,7 +556,14 @@ public class Main {
             }
             // Main menu options
             System.out.println("\nMENU: \n1) Explore Forest\n2) Sell Logs\n3) Buy Axe\n4) See Stats\n5) Exit");
-            treeMenu = sc.nextInt();
+            try {
+                sc = new Scanner(System.in);
+                treeMenu = sc.nextInt();
+            }
+            catch (Exception e) {
+                System.out.println("ERROR: " + e.getMessage());
+                continue;
+            }
             if (playerTotalXp >= totalXpToLevel) {
                 playerLevel++;
                 System.out.println("You have reached Level " + playerLevel + "!");
