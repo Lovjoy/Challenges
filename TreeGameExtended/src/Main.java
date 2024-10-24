@@ -408,7 +408,17 @@ public class Main {
                             + " 2,500g\n5) " + String.valueOf(Axe.MITHRIL) + " 5,000g\n6) " + String.valueOf(Axe.ADAMANT)
                             + " 10,000g\n7) " + String.valueOf(Axe.RUNED) + " 30,000g\n8) " + String.valueOf(Axe.ENCHANTED)
                             + " 50,000g\n9) Exit");
-                    axeMenu = sc.nextInt();
+                    
+                    try {
+                        sc = new Scanner(System.in);
+                        axeMenu = sc.nextInt();
+                    }
+                    catch (Exception e) {
+                        System.out.println("ERROR: Invalid menu option, please try again.");
+                        continue;
+                    }
+                    
+                    
                     oldAxeHold = axe;
                     switch (axeMenu) {
                         case 1:
@@ -547,7 +557,7 @@ public class Main {
                 case 5: // Quit Game
                     break;
                 default: // Error Message
-                    System.out.println("Invalid menu option, please try again.");
+                    System.out.println("ERROR: Invalid menu option, please try again.");
                     break;
             }
             // Quit the Game and exit the while loop
@@ -561,7 +571,7 @@ public class Main {
                 treeMenu = sc.nextInt();
             }
             catch (Exception e) {
-                System.out.println("ERROR: " + e.getMessage());
+                System.out.println("ERROR: Invalid Menu Option, please try again.");
                 continue;
             }
             if (playerTotalXp >= totalXpToLevel) {
