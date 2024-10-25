@@ -17,7 +17,7 @@ public class Main {
         int[] numbers = new int[5];
         int[] numbers2 = new int [7];
         int[] numbers3 = new int[9];
-        int[] combined = new int[20];
+        int[] combined = new int[21];
 
         for (int i = 0; i < numbers.length; i++) {
             numbers[i] = rand.nextInt(401) - 200;   // Random int -200, 200
@@ -39,7 +39,7 @@ public class Main {
             combined[i + 5] = numbers2[i]; // off set by size of numbers
         }
         for (int i = 0; i < numbers3.length; i++) {
-            combined[i + 11] = numbers3[i]; // off set by size of numbers and numbers2
+            combined[i + 12] = numbers3[i]; // off set by size of numbers and numbers2
         }
 
         System.out.println(Arrays.toString(combined));
