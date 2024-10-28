@@ -20,35 +20,33 @@ public class Main {
         int sum = 0;
         int minIndex = 0;
 
-        for (int k = 0, j = 0; k < 4; k++, j++) {
+        for (int i = 0, j = 0; i < 4; i++, j++) {
             System.out.println("Enter the size of the array 2 - 5: ");
             size = sc.nextInt();
             sum = 0;
-            for (int i = 0; i < size; i++) {
-                arr[j][i] = rand.nextInt(10) + 1;
-                sum += arr[j][i];
+            for (int k = 0; k < size; k++) {
+                arr[j][k] = rand.nextInt(10) + 1;
+                sum += arr[j][k];
             }
-            sumArray[k] = sum;
-        }
-        System.out.println("\nTrue Values: ");
-        System.out.println(Arrays.toString(sumArray));
-
-
-        for (int m = 0; m < 4; m++) {
-            for (int k = 0; k < 4; k++) {
-                for (int j = 0; j < 5; j++) {
-                    for (int i = 0; i < sumArray.length; i++) {
-                        if (sumArray[i] < sumArray[minIndex]) {
-                            minIndex = i;
-                        }
-                    }
-                    arrSorted[m][j] = arr[minIndex][j];
-                }
-            }
-            sumArray[minIndex] = 999999999;
+            sumArray[i] = sum;
         }
         System.out.println("Original Array: ");
         System.out.println(Arrays.deepToString(arr));
+        System.out.println("True Values: ");
+        System.out.println(Arrays.toString(sumArray));
+
+
+        for (int i = 0; i < 4; i++) {
+                for (int j = 0; j< 5; j++) {
+                    for (int k = 0; k < sumArray.length; k++) {
+                        if (sumArray[k] < sumArray[minIndex]) {
+                            minIndex = k;
+                        }
+                    }
+                    arrSorted[i][j] = arr[minIndex][j];
+                }
+            sumArray[minIndex] = 999999999;
+        }
         System.out.println("Sorted Array: ");
         System.out.println(Arrays.deepToString(arrSorted));
     }
