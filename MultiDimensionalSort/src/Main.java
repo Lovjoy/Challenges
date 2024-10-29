@@ -13,25 +13,25 @@ public class Main {
         Random rand = new Random();
 
         int size;
-        int[][] arr = new int[4][5];
+        int[][] originalArr = new int[4][5];
         int[][] arrSorted = new int[4][5];
         int[] sumArray = new int[4];
 
         int sum = 0;
         int minIndex = 0;
 
-        for (int i = 0, j = 0; i < 4; i++, j++) {
+        for (int i = 0; i < 4; i++) {
             System.out.println("Enter the size of the array 2 - 5: ");
             size = sc.nextInt();
             sum = 0;
             for (int k = 0; k < size; k++) {
-                arr[j][k] = rand.nextInt(10) + 1;
-                sum += arr[j][k];
+                originalArr[i][k] = rand.nextInt(10) + 1;
+                sum += originalArr[i][k];
             }
             sumArray[i] = sum;
         }
         System.out.println("Original Array: ");
-        System.out.println(Arrays.deepToString(arr));
+        System.out.println(Arrays.deepToString(originalArr));
         System.out.println("True Values: ");
         System.out.println(Arrays.toString(sumArray));
 
@@ -43,7 +43,7 @@ public class Main {
                             minIndex = k;
                         }
                     }
-                    arrSorted[i][j] = arr[minIndex][j];
+                    arrSorted[i][j] = originalArr[minIndex][j];
                 }
             sumArray[minIndex] = 999999999;
         }
