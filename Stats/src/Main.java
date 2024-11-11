@@ -85,9 +85,9 @@ public class Main {
             System.out.println("Median: " + (double)((numbers[(n - 1) / 2] + (numbers[((n - 1)/ 2) + 1])) / 2));
             System.out.println("Q3: " + numbers[(3 * n) / 4]);
         } else {
-            System.out.println("Q1: " + (double)((numbers[(n / 4) - 1]) + numbers[n / 4]) / 2);
+            System.out.println("Q1: " + (numbers[n / 4]));
             System.out.println("Median: " + ((numbers[n / 2] )));
-            System.out.println("Q3: " + (double)((numbers[(3 * n) / 4 ]) + numbers[(3 * n) / 4 + 1]) / 2);
+            System.out.println("Q3: " + (numbers[(3 * n) / 4 ]));
         }
         System.out.println("Max: " + numbers[n - 1]);
         System.out.printf("Mean: %.2f\n", (sum / n));

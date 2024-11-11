@@ -20,6 +20,7 @@ public class Main {
 
     public enum Symbol {Banana, Carrot, Foxes, Bears, Stars, Tiger, Roses, Sauce}
 
+
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
