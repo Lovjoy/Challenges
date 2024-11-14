@@ -61,7 +61,8 @@ public class Main {
                 } else {
                     forest[i] = TREE.Normal;
                 }
-            } else if (level < 45) { // 45% chance for Willow that increase per level, 5% chance Normal, rest % Oak
+                // starting at level 8, 45% chance for Willow that increase per level, 5% chance Normal, rest % Oak
+            } else if (level < 45) {
                 if (random < (0.45 + (level - 30) * 0.02)) {
                     forest[i] = TREE.Willow;
                 } else if (random < .95) {
@@ -69,7 +70,8 @@ public class Main {
                 } else {
                     forest[i] = TREE.Normal;
                 }
-            } else if (level < 60) { // 40% chance Maple that increase per level, 5% Normal, 5% Oak, rest % Willow
+                // starting at level 45, 40% chance Maple that increase per level, 5% Normal, 5% Oak, rest % Willow
+            } else if (level < 60) {
                 if (random < (0.40 + (level - 45) * 0.02)) {
                     forest[i] = TREE.Maple;
                 } else if (random < 0.90) {
@@ -79,7 +81,8 @@ public class Main {
                 } else {
                     forest[i] = TREE.Normal;
                 }
-            } else if (level < 80) { // 35% chance Yew that increase per level, 2% Normal, 3% Oak, 5% Willow, rest % Maple
+                // starting at level 60, 35% chance Yew that increase per level, 2% Normal, 3% Oak, 5% Willow, rest % Maple
+            } else if (level < 80) {
                 if (random < (0.35 + (level - 60) * 0.02)) {
                     forest[i] = TREE.Yew;
                 } else if (random < 0.90) {
@@ -91,7 +94,8 @@ public class Main {
                 } else {
                     forest[i] = TREE.Normal;
                 }
-            } else { // 30% chance Magic that increase per level, 2% Normal, 3% Oak, 5% Willow, 5% Maple, rest % Yew
+                // starting at level 80, 30% chance Magic that increase per level, 2% Normal, 3% Oak, 5% Willow, 5% Maple, rest % Yew
+            } else {
                 if (rand.nextDouble() < (0.30 + (level - 80) * 0.01)) {
                     forest[i] = TREE.Magic;
                 } else if (rand.nextDouble() < 0.85) {
@@ -107,6 +111,7 @@ public class Main {
                 }
             }
         }
+        // Print Forest Menu and return as an array
         System.out.println("You enter the forest. Select a tree to cut down.");
         System.out.println("1) " + forest[0].toString() + "\n2) " + forest[1].toString() + "\n3) " + forest[2].toString()
                 + "\n4) " + forest[3].toString());
@@ -117,13 +122,15 @@ public class Main {
         Random rand = new Random();
 
         int[] logsAndChops = new int[2];
-        int logs = 0;
-        int chops = 0;
-        int maxLogs = 5;
-        double treeCutChance = 0.20;
-        int logsRemaining;
-        String star = "";
+        int logs = 0;                   // Start with no logs chopped, increase with successful chop
+        int chops = 0;                  // Starts at 0 and increase by one with each chop
+        int maxLogs = 5;                // Max logs tree holds, normal tree only 5 logs
+        double treeCutChance = 0.20;    // Chance chop will yield a log depending on try, 20% normal tree
+        int logsRemaining;              // Max logs - logs chopped
+        String star = "";               // Prints a star * for each successful log received from chop
 
+
+        // Max Logs and Chance the tree will yield a log depending on the tree type, normal default is 5 and 20%
         if (tree == TREE.Oak) {
             maxLogs = 12;
             treeCutChance = 0.18;
@@ -146,6 +153,7 @@ public class Main {
         }
         logsRemaining = maxLogs;
         while (logsRemaining > 0) {
+            // Speed Pot makes Chop animation twice as fast
             double x = 1;
             if (speedPot) {
                 x = 0.5;
@@ -155,26 +163,30 @@ public class Main {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            // Prints Chop and counts Chops, increase chance to break with every chop
             System.out.println("Chop.");
-            chanceToBreak += durabilityLost(axe);
             chops++;
+            chanceToBreak += durabilityLost(axe);
 
+            // Strength Pot makes chance for log yield from a chop 3 times as likely
             int y = 1;
             if (strengthPot) {
-                y = 2;
+                y = 3;
             }
-
+            // Chance that chop will yield a log
             if (rand.nextDouble() <= (treeCutChance + axeBonusPercent(axe) * y)) {
                 logs++;
                 logsRemaining--;
                 star += "*";
                 System.out.println(star);
 
+                // Axe will only break on successful log yield and stops the while loop
                 if (rand.nextDouble() < chanceToBreak) {
                     System.out.println("Your axe breaks into pieces.");
                     axeBroken = true;
                     break;
                 }
+                // Tree can fall before all logs are collected, decrease with upgraded axe
                 if (rand.nextDouble() < fallChance(axe)) {
                     logsRemaining = 0;
                     System.out.println("Crack.");
@@ -190,7 +202,6 @@ public class Main {
                         e.printStackTrace();
                     }
                     System.out.println("CRASH!!");
-
                     System.out.println("The tree has fallen.");
                     break;
                 }
@@ -200,7 +211,7 @@ public class Main {
         logsAndChops[1] = chops;
         return logsAndChops;
     }
-
+    // Increase chance the tree will yield a log depending on upgrade axe
     public static double axeBonusPercent(AXE axe) {
         double axeBonus = 0;
         if (axe == AXE.Bronze) {
@@ -230,6 +241,7 @@ public class Main {
         return axeBonus;
     }
 
+    // Decrease chance the tree will fall and yield no more logs depending on upgrade axe
     public static double fallChance(AXE axe) {
         double fallChance = 0.08;
         if (axe == AXE.Obsidian) {
@@ -251,10 +263,7 @@ public class Main {
     }
 
     public static int goldValueOfLogs(TREE tree, int logs) {
-        int gold = 0;
-        if (tree == TREE.Normal) {
-            gold = logs * 7;
-        }
+        int gold = 7;
         if (tree == TREE.Oak) {
             gold = logs * 9;
         }
@@ -293,6 +302,7 @@ public class Main {
         return logs * xpPerLog;
     }
 
+    // Increases chance axe will break with each chop depending on axe upgrade axe. Rusty axe can not break
     public static double durabilityLost(AXE axe) {
         double durabilityLost = 0;
         if (axe == AXE.Bronze) {
@@ -322,6 +332,7 @@ public class Main {
         return durabilityLost;
     }
 
+    // Value of axe for store and repair is 5% axe value
     public static int axeGoldValue(AXE axe) {
         int goldValue = 0;
         if (axe == AXE.Bronze) {
@@ -353,60 +364,62 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int playerLevel = 1;
-        int coins = 0;
-        int playerTotalXp = 0;
-        int totalXpToLevel = 100;
-        int newLogs;
-        int goldValueOfLogs = 0;
-        int menu = 6;
-        TREE[] forest = new TREE[4];
-        int treeSelect;
-        double axeBreakChance = 0;
-        AXE playerAxe = AXE.Rusty;
-        char exit = 'n';
-        int shopMenu = 0;
-        int[] logsAndChops = new int[2];
+        int playerLevel = 1;            // Starts at level one, game won at level 100
+        int playerTotalXp = 0;          // Player current experience at current level
+        int totalXpToLevel = 100;       // Player total experience must reach to increase level by one
+        int newLogs;                    // How many logs received after exploring forest
+        int coins = 0;                  // Total gold
+        int goldValueOfLogs = 0;        // Temp hold gold value of logs before they are sold
+        int menu = 6;                   // Main menu, starts with Player Stats
+        TREE[] forest = new TREE[4];    // Four trees player to pick from to chop
+        int treeSelect;                 // Player picks one of 4 trees
+        TREE treeSelected;              // Tree player picked
+        double axeBreakChance = 0;      // Percent chance axe will break on successful chop, increases with each chop
+        AXE playerAxe = AXE.Rusty;      // Current Axe, starts with Rusty
+        char exit = 'n';                // End Game confirmation
+        int shopMenu = 0;               // Shop menu choice
+        int[] logsAndChops = new int[2];// After exploring forest, holds how many logs yield and how many total chops
+        int bagSize = 8;                // How many logs player can hold, can upgrade in shop to double size
+        int costDoubleBag = 200;        // Cost to double bag size in shop, price triples with each upgrade
+        int logsInBag = 0;              // Current logs in held in bag
+        boolean speedPot = false;       // Speed Potion Active, halves time between chops
+        boolean strengthPot = false;    // Strength Potion Active, triples chance chop will yield log
+        int speedPotCountLeft = 0;      // Potion only active at least a certain number of chops
+        int strPotCountLeft = 0;        // Potion only active at least a certain number of chops
+
         //TEST
-//        int playerLevel = 69;
-//        int coins = 10000;
-//        int playerTotalXp = 0;
-//        int totalXpToLevel = 1000;
-//        int newLogs;
-//        int goldValueOfLogs = 0;
-//        int menu = 6;
-//        TREE[] forest = new TREE[4];
-//        int treeSelect;
-//        double axeBreakChance = 0;
-//        AXE playerAxe = AXE.Obsidian;
-//        char exit = 'n';
-//        int shopMenu = 0;
-//        int[] logsAndChops = new int[2];
-//        int bagSize = 32;
-//        int costDoubleBag = 1000;
-//        int logsInBag = 0;
+//        int playerLevel = 99;           // Starts at level one, game won at level 100
+//        int playerTotalXp = 0;          // Player current experience at current level
+//        int totalXpToLevel = 10000;     // Player total experience must reach to increase level by one
+//        int newLogs;                    // How many logs received after exploring forest
+//        int coins = 10000;              // Total gold
+//        int goldValueOfLogs = 0;        // Temp hold gold value of logs before they are sold
+//        int menu = 6;                   // Main menu, starts with Player Stats
+//        TREE[] forest = new TREE[4];    // Four trees player to pick from to chop
+//        int treeSelect;                 // Player picks one of 4 trees
+//        TREE treeSelected;              // Tree player picked
+//        double axeBreakChance = 0;      // Percent chance axe will break on successful chop, increases with each chop
+//        AXE playerAxe = AXE.Runed;      // Current Axe, starts with Rusty
+//        char exit = 'n';                // End Game confirmation
+//        int shopMenu = 0;               // Shop menu choice
+//        int[] logsAndChops = new int[2];// After exploring forest, holds how many logs yield and how many total chops
+//        int bagSize = 64;               // How many logs player can hold, can upgrade in shop to double size
+//        int costDoubleBag = 200;        // Cost to double bag size in shop, price triples with each upgrade
+//        int logsInBag = 0;              // Current logs in held in bag
+//        boolean speedPot = false;       // Speed Potion Active, halves time between chops
+//        boolean strengthPot = false;    // Strength Potion Active, triples chance chop will yield log
+//        int speedPotCountLeft = 0;      // Potion only active at least a certain number of chops
+//        int strPotCountLeft = 0;        // Potion only active at least a certain number of chops
 
-        int bagSize = 8;
-        int costDoubleBag = 200;
-        int logsInBag = 0;
-        boolean speedPot = false;
-        boolean strengthPot = false;
-        int speedPotCountLeft = 0;
-        int strPotCountLeft = 0;
-
-        TREE treeSelected;
         while (playerLevel < 100) {
 
             switch (menu) {
                 case 1: // Explore forest
-                    forest = generateForest(playerLevel);
-                    treeSelect = sc.nextInt();
-
-                    treeSelected = forest[treeSelect - 1];
-                    logsAndChops = cutLogs(playerAxe, treeSelected, axeBreakChance, speedPot, strengthPot);
-                    newLogs = logsAndChops[0];
-                    axeBreakChance += durabilityLost(playerAxe) * logsAndChops[1];
-
+                    if (axeBroken) {
+                        System.out.println("You must repair your axe.");
+                        break;
+                    }
+                    // Deactivate Potions if no counts remaining
                     if (speedPot) {
                         speedPotCountLeft -= logsAndChops[1];
                         if (speedPotCountLeft <= 0) {
@@ -414,7 +427,6 @@ public class Main {
                             speedPotCountLeft = 0;
                         }
                     }
-
                     if (strengthPot) {
                         strPotCountLeft -= logsAndChops[1];
                         if (strPotCountLeft <= 0) {
@@ -422,7 +434,18 @@ public class Main {
                             strPotCountLeft = 0;
                         }
                     }
+                    // Prints Forest and Select Tree
+                    forest = generateForest(playerLevel);
+                    treeSelect = sc.nextInt();
+                    treeSelected = forest[treeSelect - 1];
 
+                    // Chops Tree and assign new logs chopped and decrease durability depending on how many chops
+                    logsAndChops = cutLogs(playerAxe, treeSelected, axeBreakChance, speedPot, strengthPot);
+                    newLogs = logsAndChops[0];
+                    axeBreakChance += durabilityLost(playerAxe) * logsAndChops[1];
+
+
+                    // If more logs than space in bag, player will leave logs behind
                     if (newLogs < (bagSize - logsInBag)) {
                         goldValueOfLogs += goldValueOfLogs(treeSelected, newLogs);
                         playerTotalXp += experienceGained(treeSelected, newLogs);
@@ -435,6 +458,7 @@ public class Main {
                         playerTotalXp += experienceGained(treeSelected, bagSize - logsInBag);
                         logsInBag = bagSize;
                     }
+                    // Player levels up
                     if (playerTotalXp >= totalXpToLevel) {
                         playerLevel++;
                         System.out.println("You have reached Level " + playerLevel + "!");
@@ -455,7 +479,7 @@ public class Main {
                     axeBreakChance = 0;
                     coins -= (int) 0.05 * axeGoldValue(playerAxe);
                     System.out.println("Your " + String.valueOf(playerAxe) + " axe has been repaired for " + 0.05 * axeGoldValue(playerAxe)
-                            + " gold. You now have a total of " + coins + " gold.");
+                            + " gold.");
                     break;
                 case 4: // Axe Upgrade
                     AXE axePurchased = AXE.Rusty;
@@ -531,7 +555,7 @@ public class Main {
                         strPotCountLeft += 200;
                         coins -= 500;
                         System.out.println("You purchased a potion of strength for 500g. Additional purchases increase the duration.");
-                        System.out.println("You now chop double the chance of receiving a log for the next " + strPotCountLeft + " chops.");
+                        System.out.println("You now chop triple the chance of receiving a log for the next " + strPotCountLeft + " chops.");
                     } else {
                         System.out.println("No Purchase");
                     }
@@ -553,7 +577,7 @@ public class Main {
                     System.out.println("INVALID INPUT");
                     break;
             }
-            if (exit == 'y' || exit == 'Y') {
+            if (exit == 'y' || exit == 'Y' || playerLevel == 100) {
                 System.out.println("You have reached level " + playerLevel + ". Thank you for playing.");
                 break;
             }
