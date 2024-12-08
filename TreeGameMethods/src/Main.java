@@ -37,57 +37,57 @@ public class Main {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		Random rand = new Random();
-//		int playerLevel = 1; // Starts at level one, game won at level 100
-//		int playerTotalXp = 0; // Player current experience at current level
-//		int totalXpToLevel = 100; // Player total experience must reach to increase level by one, increases by 7.5% each level
-//		int newLogs; // How many logs received after exploring forest
-//		int coins = 0; // Total gold
-//		int goldValueOfLogs = 0; // Temp hold gold value of logs before they are sold
-//		int menu = 6; // Main menu, starts with Player Stats
-//		TREE[] forest = new TREE[4]; // Four trees player to pick from to chop
-//		int treeMenu = 0; // Player picks one of 4 trees
-//		TREE selectedTree; // Tree player picked
-//		double axeBreakChance = 0.005; // Percent chance axe will break on successful chop, increases with each chop
-//		AXE playerAxe = AXE.Rusty; // Current Axe, starts with Rusty
-//		char exit = 'n'; // End Game confirmation
-//		int shopMenu = 0; // Shop menu choice
-//		int[] logsAndChops = new int[2];// After exploring forest, holds how many logs yield and how many total chops
-//		int bagSize = 8; // How many logs player can hold, can upgrade in shop to double size
-//		int costDoubleBag = 200; // Cost to double bag size in shop, price triples with each upgrade
-//		int logsInBag = 0; // Current logs in held in bag
-//		boolean speedPot = false; // Speed Potion Active, halves time between chops
-//		boolean strengthPot = false; // Strength Potion Active, triples chance chop will yield log
-//		int speedPotCountLeft = 0; // Potion only active at least a certain number of chops
-//		int strPotCountLeft = 0; // Potion only active at least a certain number of chops
-//		int quantity = 1; // How many potions buy in shop
-//		int cost = 100; // cost based on quantity
+		int playerLevel = 1; 			// Starts at level one, game won at level 100
+		int playerTotalXp = 0; 			// Player current experience at current level
+		int totalXpToLevel = 100; 		// Player total experience must reach to increase level by one, increases by 7.5% each level
+		int newLogs; 					// How many logs received after exploring forest
+		int coins = 0; 					// Total gold
+		int goldValueOfLogs = 0;		// Temp hold gold value of logs before they are sold
+		int menu = 6; 					// Main menu, starts with Player Stats
+		TREE[] forest = new TREE[4]; 	// Four trees player to pick from to chop
+		int treeMenu = 0; 				// Player picks one of 4 trees
+		TREE selectedTree; 				// Tree player picked
+		double axeBreakChance = 0.005; 	// Percent chance axe will break on successful chop, increases with each chop
+		AXE playerAxe = AXE.Rusty; 		// Current Axe, starts with Rusty
+		char exit = 'n'; 				// End Game confirmation
+		int shopMenu = 0; 				// Shop menu choice
+		int[] logsAndChops = new int[2];// After exploring forest, holds how many logs yield and how many total chops
+		int bagSize = 8; 				// How many logs player can hold, can upgrade in shop to double size
+		int costDoubleBag = 200; 		// Cost to double bag size in shop, price triples with each upgrade
+		int logsInBag = 0; 				// Current logs in held in bag
+		boolean speedPot = false; 		// Speed Potion Active, halves time between chops
+		boolean strengthPot = false; 	// Strength Potion Active, triples chance chop will yield log
+		int speedPotCountLeft = 0; 		// Potion only active at least a certain number of chops
+		int strPotCountLeft = 0; 		// Potion only active at least a certain number of chops
+		int quantity = 1; 				// How many potions buy in shop
+		int cost = 100; 				// cost based on quantity
 
 
 		// TEST
-        int playerLevel = 74;           // Starts at level one, game won at level 100
-        int playerTotalXp = 0;          // Player current experience at current level
-        int totalXpToLevel = 20000;      // Player total experience must reach to increase level by one
-        int newLogs;                    // How many logs received after exploring forest
-        int coins = 50000;              // Total gold
-        int goldValueOfLogs = 0;        // Temp hold gold value of logs before they are sold
-        int menu = 6;                   // Main menu, starts with Player Stats
-        TREE[] forest = new TREE[4];    // Four trees player to pick from to chop
-        int treeMenu = 0;                 // Player picks one of 4 trees
-        TREE selectedTree;              // Tree player picked
-        double axeBreakChance = 0.0005;      // Percent chance axe will break on successful chop, increases with each chop
-        AXE playerAxe = AXE.Adamant;      // Current Axe, starts with Rusty
-        char exit = 'n';                // End Game confirmation
-        int shopMenu = 0;               // Shop menu choice
-        int[] logsAndChops = new int[2];// After exploring forest, holds how many logs yield and how many total chops
-        int bagSize = 128;               // How many logs player can hold, can upgrade in shop to double size
-        int costDoubleBag = 16200;        // Cost to double bag size in shop, price triples with each upgrade
-        int logsInBag = 0;              // Current logs in held in bag
-        boolean speedPot = true;       // Speed Potion Active, halves time between chops
-        boolean strengthPot = false;    // Strength Potion Active, triples chance chop will yield log
-        int speedPotCountLeft = 100;      // Potion only active at least a certain number of chops
-        int strPotCountLeft = 0;        // Potion only active at least a certain number of chops
-		int quantity = 1; 					// cost based on quantity
-		int cost = 100; 						// cost based on quantity
+//        int playerLevel = 74;           // Starts at level one, game won at level 100
+//        int playerTotalXp = 0;          // Player current experience at current level
+//        int totalXpToLevel = 20000;      // Player total experience must reach to increase level by one
+//        int newLogs;                    // How many logs received after exploring forest
+//        int coins = 50000;              // Total gold
+//        int goldValueOfLogs = 0;        // Temp hold gold value of logs before they are sold
+//        int menu = 6;                   // Main menu, starts with Player Stats
+//        TREE[] forest = new TREE[4];    // Four trees player to pick from to chop
+//        int treeMenu = 0;                 // Player picks one of 4 trees
+//        TREE selectedTree;              // Tree player picked
+//        double axeBreakChance = 0.0005;      // Percent chance axe will break on successful chop, increases with each chop
+//        AXE playerAxe = AXE.Adamant;      // Current Axe, starts with Rusty
+//        char exit = 'n';                // End Game confirmation
+//        int shopMenu = 0;               // Shop menu choice
+//        int[] logsAndChops = new int[2];// After exploring forest, holds how many logs yield and how many total chops
+//        int bagSize = 128;               // How many logs player can hold, can upgrade in shop to double size
+//        int costDoubleBag = 16200;        // Cost to double bag size in shop, price triples with each upgrade
+//        int logsInBag = 0;              // Current logs in held in bag
+//        boolean speedPot = true;       // Speed Potion Active, halves time between chops
+//        boolean strengthPot = false;    // Strength Potion Active, triples chance chop will yield log
+//        int speedPotCountLeft = 100;      // Potion only active at least a certain number of chops
+//        int strPotCountLeft = 0;        // Potion only active at least a certain number of chops
+//		int quantity = 1; 					// cost based on quantity
+//		int cost = 100; 						// cost based on quantity
 
 		System.out.println("\nWelcome to \nAlways Be Chopping!!!\nReach level 100 to win.");
 		while (playerLevel < 100) {
